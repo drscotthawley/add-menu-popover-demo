@@ -8,11 +8,33 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIPopoverPresentationControllerDelegate {
+    
+    @IBOutlet weak var addbutton: UIBarButtonItem!
+    
+    @IBOutlet weak var messageLabel: UILabel!
+    
+    var menuSelections : [String] = []
+    
+    @IBAction func addButtonPress(sender: AnyObject) {
+         self.performSegueWithIdentifier("showView", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "showView" {
+            let vc = segue.destinationViewController
+            let controller = vc.popoverPresentationController
+            
+            if controller != nil {
+                controller?.delegate = self
+            }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        messageLabel.text = ""
     }
 
     override func didReceiveMemoryWarning() {
@@ -20,6 +42,11 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+    
+    
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .None
+    }
 
 }
 
