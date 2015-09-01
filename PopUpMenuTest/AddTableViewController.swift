@@ -50,7 +50,7 @@ class AddTableViewController: UITableViewController {
         let selectionString = cellStrings[indexPath.row]
         print(" ChooseGearTableViewController: Hey you just selected \(selectionString)")
         let rootVC = self.presentingViewController as! ViewController
-        rootVC.menuSelections.append(selectionString)
+        rootVC.menuSelections = [selectionString]
         
     }
 
